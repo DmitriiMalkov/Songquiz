@@ -29,6 +29,12 @@ class SongsQuiz:
         print()
         print("Введите название песни")
 
+    def getAnswerAndCheck(self):
+        self.answer = input()
+        if self.answer.lower() == self.song.lower():
+            self.pluses += 1
+        print()
+
     def testPlus(self):
         if self.answer.lower() == self.song.lower() and self.pluses == (self.testpluses + 1):
             self.testpluses = self.testpluses + 1
@@ -72,6 +78,7 @@ class SongsQuiz:
             self.testNotTheSameSong(obj)
             self.askQuestion(obj)
             self.testRightQuestion(obj)
+            self.getAnswerAndCheck(obj)
             self.testPlus(obj)
             self.quizes = self.quizes + 1
         self.testsCheck(obj)
