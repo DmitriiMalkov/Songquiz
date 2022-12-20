@@ -5,10 +5,14 @@ class SongsQuiz:
     songs = ["Jingle Bells", "Last Christmas", "Never Gonna Give You Up", "Shape of You",
              "We Wish You a Merry Christmas"]
     usedSongs = []
+    pluses = 0
     quizes = 0
+    testpluses = 0
     file = 0
     song = "Jingle Bells"
+    TP = []
     TNTSS = []
+    answer = "Jingle Bells"
     TRQ = []
 
     def chooseSong(self):
@@ -25,6 +29,15 @@ class SongsQuiz:
         print()
         print("Введите название песни")
 
+    def testPlus(self):
+        if self.answer.lower() == self.song.lower() and self.pluses == (self.testpluses + 1):
+            self.testpluses = self.testpluses + 1
+            self.TP.append(1)
+        elif self.answer.lower() != self.song.lower() and self.pluses == self.testpluses:
+            self.TP.append(1)
+        else:
+            self.TP.append(0)
+
     def testNotTheSameSong(self):
         if self.song in self.usedSongs or self.song == "":
             self.TNTSS.append(0)
@@ -40,6 +53,10 @@ class SongsQuiz:
             self.TRQ.append(0)
 
     def testsCheck(self):
+        if 0 in self.TP:
+            print("testPlus: unsuccess")
+        else:
+            print("testPlus: success")
         if 0 in self.TNTSS:
             print("testNotTheSameSong: unsuccess")
         else:
@@ -55,6 +72,7 @@ class SongsQuiz:
             self.testNotTheSameSong(obj)
             self.askQuestion(obj)
             self.testRightQuestion(obj)
+            self.testPlus(obj)
             self.quizes = self.quizes + 1
         self.testsCheck(obj)
 
