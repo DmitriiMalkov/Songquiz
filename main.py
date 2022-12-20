@@ -5,7 +5,9 @@ class SongsQuiz:
     songs = ["Jingle Bells", "Last Christmas", "Never Gonna Give You Up", "Shape of You",
              "We Wish You a Merry Christmas"]
     usedSongs = []
+    i = 5
     pluses = 0
+    result = ""
     quizes = 0
     testpluses = 0
     file = 0
@@ -14,6 +16,7 @@ class SongsQuiz:
     TNTSS = []
     answer = "Jingle Bells"
     TRQ = []
+    TRR = 0
 
     def chooseSong(self):
         self.song = random.choice(self.songs)
@@ -58,6 +61,10 @@ class SongsQuiz:
         else:
             self.TRQ.append(0)
 
+    def testRightResult(self):
+        if self.result == f"Вы угадали {self.pluses} из {self.i} песен.":
+            self.TRR = 1
+
     def testsCheck(self):
         if 0 in self.TP:
             print("testPlus: unsuccess")
@@ -71,6 +78,10 @@ class SongsQuiz:
             print("testRightQuestion: unsuccess")
         else:
             print("testRightQuestion: success")
+        if self.TRR == 1:
+            print("testRightResult: success")
+        else:
+            print("testRightResult: unsuccess")
 
     def main(self):
         while self.quizes != 5:
@@ -81,6 +92,7 @@ class SongsQuiz:
             self.getAnswerAndCheck(obj)
             self.testPlus(obj)
             self.quizes = self.quizes + 1
+        self.testRightResult(obj)
         self.testsCheck(obj)
 
 
